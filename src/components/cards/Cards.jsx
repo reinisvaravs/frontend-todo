@@ -4,8 +4,9 @@ import { fetchData } from "../buttons/RefreshBtn/RefreshBtn";
 import { useEffect, useState } from "react";
 import { FaTrashAlt, FaRegHeart, FaHeart } from "react-icons/fa";
 import { handleDelete } from "../buttons/DeleteBtn/DeleteBtn";
-const API_BASE_URL = import.meta.env.VITE_API_URL;
 import { debounce } from "lodash";
+
+const API_BASE_URL = import.meta.env.VITE_API_URL;
 
 function Cards({ content, setContent, setName }) {
   const [likes, setLikes] = useState({});
@@ -83,7 +84,9 @@ function Cards({ content, setContent, setName }) {
         content.map(({ name, value, likeCount }) => (
           <div className={styles.card} key={name}>
             <div className={styles.cardHeader}>
+              <button className={styles.editBtn}>Edit</button>
               <button
+                className={styles.trashBtn}
                 onClick={() =>
                   handleDelete(name, setContent, () => {}, setName)
                 }

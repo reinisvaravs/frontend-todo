@@ -23,15 +23,25 @@
   position: relative;
 
   button {
-    position: absolute;
-    top: 5px;
-    right: 5px;
     cursor: pointer;
     background-color: transparent;
     border: none;
     width: 30px;
     height: 30px;
   }
+}
+
+.editBtn {
+  position: absolute;
+  top: 4px;
+  right: 38px;
+  color: #757575;
+}
+
+.trashBtn {
+  position: absolute;
+  top: 5px;
+  right: 7px;
 }
 
 .trashIcon {

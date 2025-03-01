@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./BottomMenu.module.css";
 import { handleAdd } from "../buttons/AddBtn/AddBtn";
-import { IoIosArrowDown } from "react-icons/io";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL;
 

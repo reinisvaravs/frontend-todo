@@ -1,32 +1,63 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./BottomMenu.module.css";
 import { handleAdd } from "../buttons/AddBtn/AddBtn";
 import { IoIosArrowDown } from "react-icons/io";
 
-function BottomMenu({ setContent }) {
+const API_BASE_URL = import.meta.env.VITE_API_URL;
+
+function BottomMenu({ setContent, selectedCard, setSelectedCard }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [subject, setSubject] = useState("");
   const [text, setText] = useState("");
-  const [colorChoice, setColorChoice] = useState("White");
-  const [colorOpen, setColorOpen] = useState(false);
+
+  useEffect(() => {
+    if (selectedCard) {
+      setSubject(selectedCard.name);
+      setText(selectedCard.value);
+      setIsModalOpen(true);
+    }
+  }, [selectedCard]);
 
   const handleNewCard = () => {
     setIsModalOpen(true);
+    setSelectedCard(null);
+    setSubject("");
+    setText("");
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
+    setSelectedCard(null);
     setSubject("");
     setText("");
   };
 
   const handlePublish = async () => {
-    closeModal();
-    await handleAdd(subject, text, setContent);
-  };
+    if (selectedCard) {
+      try {
+        const res = await fetch(`${API_BASE_URL}/changevalue`, {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name: selectedCard.name, newValue: text }),
+        });
 
-  const handleColorChoice = () => {
-    setColorOpen(true);
+        if (!res.ok) {
+          console.error("Failed to update the database.");
+          return;
+        }
+
+        setContent((prevContent) =>
+          prevContent.map((card) =>
+            card.name === selectedCard.name ? { ...card, value: text } : card
+          )
+        );
+      } catch (error) {
+        console.error("Error updating database:", error);
+      }
+    } else {
+      await handleAdd(subject, text, setContent);
+    }
+    closeModal();
   };
 
   return (
@@ -47,14 +78,14 @@ function BottomMenu({ setContent }) {
               onClick={handlePublish}
               disabled={subject.length === 0}
             >
-              Publish
+              {selectedCard ? "Update" : "Publish"}
             </button>
           </div>
           <div className={styles.cardBody}>
             <input
               placeholder="Subject"
               className={styles.nameInput}
-              value={subject}
+              value={selectedCard ? selectedCard.name : subject}
               onChange={(e) => setSubject(e.target.value)}
             />
             <textarea
@@ -64,24 +95,7 @@ function BottomMenu({ setContent }) {
               onChange={(e) => setText(e.target.value)}
             />
           </div>
-          <div className={styles.cardFooter}>
-            <button onClick={handleColorChoice}>
-              <div></div>
-              <p>{colorChoice}</p>
-              <IoIosArrowDown className={styles.arrow} />
-            </button>
-            {colorOpen ? (
-              <div className={styles.colorChoice}>
-                <p>Color</p>
-                <ul>
-                  <div>
-                    <div></div>
-                    <p>White</p>
-                  </div>
-                </ul>
-              </div>
-            ) : null}
-          </div>
+          <div className={styles.cardFooter}></div>
         </div>
       )}
     </div>

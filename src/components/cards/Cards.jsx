@@ -8,7 +8,7 @@ import { debounce } from "lodash";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL;
 
-function Cards({ content, setContent, setName }) {
+function Cards({ content, setContent, setName, setSelectedCard }) {
   const [likes, setLikes] = useState({});
   const [loading, setLoading] = useState(true);
 
@@ -84,7 +84,12 @@ function Cards({ content, setContent, setName }) {
         content.map(({ name, value, likeCount }) => (
           <div className={styles.card} key={name}>
             <div className={styles.cardHeader}>
-              <button className={styles.editBtn}>Edit</button>
+              <button
+                className={styles.editBtn}
+                onClick={() => setSelectedCard({ name, value })}
+              >
+                Edit
+              </button>
               <button
                 className={styles.trashBtn}
                 onClick={() =>

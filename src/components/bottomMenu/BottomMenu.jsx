@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./BottomMenu.module.css";
 import { handleAdd } from "../buttons/AddBtn/AddBtn";
 
-const API_BASE_URL = import.meta.env.VITE_API_URL;
+const API_BASE_URL = "https://friends-2v7s.onrender.com";
 
 function BottomMenu({ setContent, selectedCard, setSelectedCard }) {
   const [isModalOpen, setIsModalOpen] = useState(false);

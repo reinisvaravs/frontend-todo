@@ -6,7 +6,7 @@ import { FaTrashAlt, FaRegHeart, FaHeart } from "react-icons/fa";
 import { handleDelete } from "../buttons/DeleteBtn/DeleteBtn";
 import { debounce } from "lodash";
 
-const API_BASE_URL = import.meta.env.VITE_API_URL;
+const API_BASE_URL = "https://friends-2v7s.onrender.com";
 
 function Cards({ content, setContent, setName, setSelectedCard }) {
   const [likes, setLikes] = useState({});

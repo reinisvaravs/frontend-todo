@@ -1,6 +1,40 @@
-
 .p1 {
-  margin-top: 10px;
-  margin-left: 10px;
+  text-align: center;
 }
 
+.tech {
+  text-align: center;
+}
+
+.iconsDiv {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  height: 50px;
+  width: 50%;
+  margin: 0 25% 50px 25%;
+  gap: 30px;
+  flex-wrap: nowrap;
+}
+
+.iconNode {
+  max-width: 44px;
+}
+
+.iconReact {
+  max-width: 44px;
+}
+
+.iconFirebase {
+  max-width: 31px;
+}
+
+.iconEx,
+.iconVite {
+  max-width: 37px;
+}
+
+.iconEx {
+  max-width: 38px;
+}

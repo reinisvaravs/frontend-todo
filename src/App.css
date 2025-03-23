@@ -3,9 +3,34 @@ body {
   width: 100vw;
   overflow-x: hidden;
   color: white;
-  /* background: url(../public/tony.webp);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover; */
   background-color: rgb(25, 25, 58);
+  padding-top: 10px;
+}
+
+.asleepBackend {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 30px;
+  z-index: 1000;
+  color: white;
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  opacity: 1;
+  transform: translateY(0);
+  transition: background-color 0.5s ease, opacity 0.5s ease, transform 0.5s ease;
+  background-color: rgb(107, 0, 0);
+}
+
+.asleepBackend.awake {
+  background-color: green;
+}
+
+.asleepBackend.hidden {
+  opacity: 0;
+  transform: translateY(-100%);
+  pointer-events: none;
 }

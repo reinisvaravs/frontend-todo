@@ -27,7 +27,7 @@ function InputMenu() {
 
   return (
     <>
-      <p className={styles.p1}>PADLET.COM CLONE</p>
+      <p className={styles.p1}>TO-DO APP</p>
       <div className={styles.iconsDiv}>
         <img src={react} className={styles.iconReact} />
         <img src={vite} className={styles.iconVite} />
